@@ -100,12 +100,12 @@ export function CreateRoomForm() {
           name="language"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Primary Programming Language</FormLabel>
+              <FormLabel>Tags</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="typescript , next.js , etc..." />
               </FormControl>
               <FormDescription>
-                List the primary programming language you are working with
+                List your programming languages, framworks, libraries so people can find you content.
               </FormDescription>
               <FormMessage />
             </FormItem>
