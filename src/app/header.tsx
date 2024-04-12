@@ -44,9 +44,10 @@ function ProfileDropdown() {
           </DropdownMenuItem>
         ) : (
           <DropdownMenuItem onClick={() => signIn("google")}>
-            Sign In
-          </DropdownMenuItem>
+          Sign In
+        </DropdownMenuItem>
         )}
+        
       </DropdownMenuContent>
     </DropdownMenu>
   );

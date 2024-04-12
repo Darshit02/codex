@@ -11,8 +11,8 @@ import {
 import { Room } from "@/db/schema";
 import { LucideGithub } from "lucide-react";
 import { getRooms } from "@/app/data-access/rooms";
-import { Badge } from "@/components/ui/badge"
-
+import { Badge } from "@/components/ui/badge";
+import { TagList, spiltTags } from "@/components/tags-list";
 
 function RoomCard({ room }: { room: Room }) {
   return (
@@ -34,10 +34,8 @@ function RoomCard({ room }: { room: Room }) {
           </Link>
         )}
       </CardContent>
-      <CardContent>
-      <Badge variant="secondary" className="px-3 py-2 rounded-xl">{room.language}</Badge>
-
-        
+      <CardContent className="flex flex-wrap gap-2">
+        <TagList tags={spiltTags(room.language)} />
       </CardContent>
       <CardFooter>
         <Button asChild>
