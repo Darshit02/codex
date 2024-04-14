@@ -1,4 +1,3 @@
-
 "use client";
 
 import { z } from "zod";
@@ -48,42 +47,45 @@ export function SearchBar() {
 
   return (
     <div className="my-10">
-    <Form {...form} >
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
-        <FormField
-          control={form.control}
-          name="search"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  {...field}
-                  className="w-[440px]"
-                  placeholder="Filter rooms by keywords, such as typescript, next.js, python"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
+          <FormField
+            control={form.control}
+            name="search"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    {...field}
+                    className="w-[440px]"
+                    placeholder="Filter rooms by keywords, such as typescript, next.js, python"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Button type="submit" className="rounded-md gap-2 px-5 flex justify-center items-center py-1">
-          <SearchIcon className="h-5"/> Search
-        </Button>
-
-        {query.get("search") && (
           <Button
-            variant="link"
-            onClick={() => {
-              form.setValue("search", "");
-              router.push("/");
-            }}
+            type="submit"
+            className="rounded-md gap-2 px-5 flex justify-center items-center py-1"
           >
-            Clear
+            <SearchIcon className="h-5" /> Search
           </Button>
-        )}
-      </form>
-    </Form>
+
+          {query.get("search") && (
+            <Button
+              variant="link"
+              onClick={() => {
+                form.setValue("search", "");
+                router.push("/");
+              }}
+            >
+              Clear
+            </Button>
+          )}
+        </form>
+      </Form>
     </div>
   );
 }
