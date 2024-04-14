@@ -1,18 +1,37 @@
+"use server"
 import { db } from "@/db";
 import { room } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { getSession } from "@/lib/auth";
+import { eq, like } from "drizzle-orm";
 import { unstable_noStore } from "next/cache";
 
-export async function getRooms() {
-  unstable_noStore();
-  const rooms = await db.query.room.findMany();
+export async function getRooms(search : string | undefined) {
+  const where = search ? like(room.language, `%${search}%`) : undefined;
+  const rooms = await db.query.room.findMany({
+    where,
+  });
   return rooms;
 }
 
+export async function getUserRooms() {
+  const session = await getSession();
+  if(!session) {
+    throw new Error("No session found");
+  }
+
+  const rooms = await db.query.room.findMany({
+    where : eq(room.userId , session.user.id)
+  });
+  return rooms;
+}
 // find one room  by id
 export async function getRoom(roomId: string) {
   unstable_noStore();
   return await db.query.room.findFirst({
     where: eq(room.id, roomId),
   });
+}
+
+export async function deleteRoom(roomId: string) {
+  await db.delete(room).where(eq(room.id , roomId))
 }

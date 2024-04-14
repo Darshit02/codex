@@ -1,17 +1,21 @@
-import { room } from "@/db/schema";
-import { Badge } from "@/components/ui/badge";
+"use client"
 
-export function spiltTags(language: string) {
-    return  language.split(",").map((lang) => lang.trim());
-    
-}
+import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
 
 export function TagList({ tags }: { tags: string[] }) {
+  const router = useRouter();
   return (
     <>
       <h3>Tags : </h3>
       {tags.map((lang) => (
-        <Badge className="w-fit" key={lang}>
+        <Badge
+          onClick={() => {
+            router.push(`/?search=${lang}`);
+          }}
+          className="w-fit cursor-pointer"
+          key={lang}
+        >
           {lang}
         </Badge>
       ))}

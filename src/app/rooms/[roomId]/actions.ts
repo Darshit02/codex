@@ -3,8 +3,6 @@
 import { getSession } from "@/lib/auth";
 import { StreamChat } from "stream-chat";
 
-
-
 export async function generateTokenAction() {
   const session = await getSession();
   if (!session) {

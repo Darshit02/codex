@@ -1,9 +1,10 @@
 import { getRoom } from "@/app/data-access/rooms";
-import { TagList, spiltTags } from "@/components/tags-list";
+import { TagList } from "@/components/tags-list";
 import { Badge } from "@/components/ui/badge";
 import { LucideGithub } from "lucide-react";
 import Link from "next/link";
 import { CodeXVideo } from "./video-player";
+import { spiltTags } from "@/lib/utils";
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
   const roomId = props.params.roomId;
