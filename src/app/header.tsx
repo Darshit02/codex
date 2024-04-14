@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Power, Terminal } from "lucide-react";
+import { DeleteIcon, LogInIcon, LogOutIcon, Power, Terminal } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -21,56 +21,78 @@ function ProfileDropdown() {
   const isLoggedIn = !!session.data;
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant={"ghost"}
-          className="flex justify-center items-center gap-3"
-        >
-          <Avatar>
-            <AvatarImage src={session.data?.user?.image!} alt="none" />
-            <AvatarFallback>{session.data?.user?.name || ""}</AvatarFallback>
-          </Avatar>
-          {session.data?.user?.name || ""}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="mt-3">
-        {/* <DropdownMenuSeparator /> */}
-        {isLoggedIn ? (
-          <DropdownMenuItem
-            onClick={() => signOut()}
-            className="flex justify-center items-center gap-2"
-          >
-            <Power className="h-4 w-4" /> Sign Out
-          </DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem onClick={() => signIn("google")}>
-          Sign In
-        </DropdownMenuItem>
-        )}
-        
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
+    <DropdownMenuTrigger asChild>
+      <Button variant="ghost">
+        <Avatar className="mr-2">
+          <AvatarImage src={session.data?.user?.image ?? ""} />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+
+        {session.data?.user?.name}
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem
+        onClick={() =>
+          signOut({
+            callbackUrl: "/",
+          })
+        }
+      >
+        <LogOutIcon className="mr-2" /> Sign Out
+      </DropdownMenuItem>
+
+      {/* <DropdownMenuItem
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <DeleteIcon className="mr-2" /> Delete Account
+      </DropdownMenuItem> */}
+    </DropdownMenuContent>
+  </DropdownMenu>
+  )
 }
 
-export const Header = () => {
-  return (
-    <header className=" bg-gray-100 dark:bg-gray-900 py-4 px-10">
-      <div className="flex justify-between items-center">
-        <Link href="/">
-          <div className="flex items-center justify-center gap-4">
-            <Terminal />
-            <span className="text-gray-900 font-semibold text-xl dark:text-white">
-              
-              CodeX
-              </span>
-          </div>
-        </Link>
-        <div className="flex justify-center items-center gap-4">
-          <ProfileDropdown />
-          <ModeToggle />
-        </div>
-      </div>
-    </header>
-  );
-};
+export function Header() {
+const session = useSession();
+const isLoggedIn = !!session.data;
+
+return (
+<header className="bg-gray-100 py-2 dark:bg-gray-900 z-10 relative">
+  <div className="container mx-auto flex justify-between items-center">
+    <Link
+      href="/"
+      className="flex gap-2 items-center text-xl hover:underline"
+    >
+      <Terminal className="mr-2" />
+      CodeX
+    </Link>
+
+    <nav className="flex gap-8">
+      {isLoggedIn && (
+        <>
+          <Link className="hover:underline" href="/browse">
+            Browse
+          </Link>
+
+          <Link className="hover:underline" href="/your-rooms">
+            Your Rooms
+          </Link>
+        </>
+      )}
+    </nav>
+
+    <div className="flex items-center gap-4">
+      {isLoggedIn && <ProfileDropdown />}
+      {!isLoggedIn && (
+        <Button onClick={() => signIn()} variant="outline">
+          <LogInIcon className="mr-2" /> Sign In
+        </Button>
+      )}
+      <ModeToggle />
+    </div>
+  </div>
+</header>
+);
+}
