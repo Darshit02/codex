@@ -31,14 +31,19 @@ export async function getRoom(roomId: string) {
     where: eq(room.id, roomId),
   });
 }
-
 export async function deleteRoom(roomId: string) {
-  await db.delete(room).where(eq(room.id , roomId))
+  await db.delete(room).where(eq(room.id, roomId));
 }
 
-
-export async function createRoom(roomData: Omit<Room, "id" | "userId"> , userId : string) {
-  await db.insert(room).values({...roomData , userId })
+export async function createRoom(
+  roomData: Omit<Room, "id" | "userId">,
+  userId: string
+) {
+  const inserted = await db
+    .insert(room)
+    .values({ ...roomData, userId })
+    .returning();
+  return inserted[0];
 }
 
 export async function editRoom(roomData: Room) {
