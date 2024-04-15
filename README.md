@@ -1,9 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CodeX
 
-## Getting Started
+CodeX is a Pair programming webApp where developer stay connect and pair with programer who work on their favourite languages. 
 
-First, run the development server:
 
+## Tech Stack
+
+**Client :** React, Zustand, TailwindCSS, NextJS, Stream.io
+
+**Server :** Node, Express, drizzleORM, Postgrsql, Docker
+
+
+## Features
+
+🌙 Light/dark mode toggle
+
+➿ Live previews.
+
+🖥️ Fullscreen mode.
+
+➕ CRUD Rooms.
+
+⚓ Google Authentication/safe data.
+
+🎉 Live Code collobration.
+
+🔎 Find favourite programing language Rooms.
+
+🦭 search participant.
+
+🌀 browse rooms.
+
+
+## Installation
+
+Install my-project with npm
+
+```bash
 ```bash
 npm run dev
 # or
@@ -13,24 +45,67 @@ pnpm dev
 # or
 bun dev
 ```
+```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install docker Engine Your Local machine :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Spinup data base using docker 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+  docker compose up
+```
 
-## Learn More
+For database push on your machine 
 
-To learn more about Next.js, take a look at the following resources:
+Run drizzle command (setup in package.json)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run db:push
+```
+For Drizzle studio Run 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm run db:studio
+```
+## Environment Variables
 
-## Deploy on Vercel
+To run this project, you will need to add the following environment variables to your .env file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`DATABASE_URL=""`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`GOOGLE_CLIENT_ID=""`
+
+`GOOGLE_CLIENT_SECRET=""`
+
+`NEXT_PUBLIC_GET_STREAM_API_KEY=""`
+
+`GET_STREAM_SECRET_KEY=""`
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Darshit02/codex
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+
