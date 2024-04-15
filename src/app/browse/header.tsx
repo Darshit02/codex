@@ -72,12 +72,12 @@ export function Header() {
         <nav className="flex gap-8">
           {isLoggedIn && (
             <>
-              <div className="dark:bg-gray-100 px-3 py-1 dark:text-gray-900 bg-gray-900 text-gray-100  rounded-md">
+              <div className=" px-3 py-1 rounded-md">
                 <Link className="" href="/browse">
                   Browse
                 </Link>
               </div>
-              <div className="dark:bg-gray-100 px-3 py-1 dark:text-gray-900 bg-gray-900 text-gray-100 rounded-md">
+              <div className=" px-3 py-1 rounded-md">
                 <Link className="" href="/your-rooms">
                   Your Rooms
                 </Link>
