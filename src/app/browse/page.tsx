@@ -4,6 +4,7 @@ import { getRooms } from "@/app/data-access/rooms";
 import { SearchBar } from "./search-bar";
 import { RoomCard } from "@/components/room-card";
 import { unstable_noStore } from "next/cache";
+import Image from "next/image";
 
 
 export default async function Home({
@@ -30,6 +31,19 @@ export default async function Home({
           return <RoomCard key={room.id} room={room} />;
         })}
       </div>
+      {
+        rooms.length === 0 && (
+          <div className="flex justify-center items-center flex-col mt-24 gap-4">
+            <Image 
+            src="/no-data.svg"
+            alt="No data"
+            width={300}
+            height={300}
+            />
+            <h2 className="text-muted-foreground text-2xl">No Rooms Live Yet!</h2>
+          </div>
+        )
+      }
     </main>
   );
 }
