@@ -1,6 +1,6 @@
 # CodeX
 
-CodeX is a Pair programming webApp where developer stay connect and pair with programer who work on their favourite languages. 
+CodeX is a Pair programming webApp whare developer stay connect and pair with programer who work on their favourite languages. 
 
 
 ## Tech Stack
